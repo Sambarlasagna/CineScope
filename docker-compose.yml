@@ -34,10 +34,8 @@ services:
       DB_NAME:     movie_reviews
       DB_USER:     postgres
       DB_PASSWORD: jaya
-    # Makes port 8000 available only to other containers in this Docker network 
-    # (like the frontend), but not to your host machine's browser directly.
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
     #Wait to start the backend until the database passes the healthcheck we defined earlier.
     depends_on:
       db:
@@ -70,7 +68,7 @@ services:
       #older than 15 days to save your hard drive space.
       - "--storage.tsdb.retention.time=15d"
     ports:
-      - "9090:9090"
+      - "9091:9090"
 
   grafana:
     image: grafana/grafana:10.4.0
@@ -83,7 +81,7 @@ services:
       - grafana_data:/var/lib/grafana
       - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - prometheus
 

@@ -1,7 +1,17 @@
 @echo off
 chcp 65001 >nul
-echo Starting CineScope backend...
-echo Make sure PostgreSQL is running and backend\.env credentials are correct.
+echo ===================================================
+echo           Starting CineScope via Docker            
+echo ===================================================
 echo.
-set PYTHONUTF8=1
-d:\Programming\Projects\ml-venv\Scripts\uvicorn.exe backend.app:app --host 0.0.0.0 --port 8000 --reload
+echo  Services will be available at:
+echo   - App:       http://localhost
+echo   - API Docs:  http://localhost:8000/docs
+echo   - Grafana:   http://localhost:3001  (admin / cinescope123)
+echo   - Metrics:   http://localhost:9091
+echo.
+echo ===================================================
+echo.
+
+docker compose up --build
+pause
